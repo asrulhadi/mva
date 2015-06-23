@@ -5,7 +5,7 @@
   {$title = "Home Page"}
 {/if}
 {if isset($info)}
-  <div class="bg-primary">{$info}</div>
+  <div class="alert alert-info">{$info}</div>
 {/if}
 {if isset($msg)}
   <div class="alert alert-success">{$msg}</div>
