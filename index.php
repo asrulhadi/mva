@@ -18,13 +18,13 @@ require("libs/Comment.php");
 require("libs/Smarty.class.php");
 
 function get_all_content() {
-	$db = DB::get_instance();
-	$sql = "SELECT id FROM article ORDER BY date_created";
-	$result = $db->query($sql);
-	while($row=$db->fetch_assoc($result)) {
-		$content_arr[] = new Article($row['id']);
-	}
-	return $content_arr;
+  $db = DB::get_instance();
+  $sql = "SELECT id FROM article ORDER BY date_created";
+  $result = $db->query($sql);
+  while($row=$db->fetch_assoc($result)) {
+    $content_arr[] = new Article($row['id']);
+  }
+  return $content_arr;
 }
 
 $user = new User();

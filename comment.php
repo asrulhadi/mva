@@ -22,25 +22,25 @@ $smarty = new Smarty();
 $db = DB::get_instance();
 
 if($_POST['submit']) {
-	// save the comment
-	$comment = new Comment();
-	$comment->set_comment($_POST['comment']);
-	$comment->set_article_id($_POST['article_id']);
-	$comment->write();
-	$smarty->assign('info', 'Your comment: ' . $comment->get_comment());
-	$smarty->assign('msg', 'Your comment has been regsitered');
-	$smarty->display('redirect.tpl');
+  // save the comment
+  $comment = new Comment();
+  $comment->set_comment($_POST['comment']);
+  $comment->set_article_id($_POST['article_id']);
+  $comment->write();
+  $smarty->assign('info', 'Your comment: ' . $comment->get_comment());
+  $smarty->assign('msg', 'Your comment has been regsitered');
+  $smarty->display('redirect.tpl');
 } else {
-	// missing content id
-	$article_id = $_GET['article_id'];
-	if(!$article_id) {
-		echo("Missing content id");
-		exit();
-	}
-	$article = new Article($article_id);
-	$smarty->assign('title', $article->get_title());
-	$smarty->assign('article_id', $article_id);
-	$smarty->display("comment.tpl");
+  // missing content id
+  $article_id = $_GET['article_id'];
+  if(!$article_id) {
+    echo("Missing content id");
+    exit();
+  }
+  $article = new Article($article_id);
+  $smarty->assign('title', $article->get_title());
+  $smarty->assign('article_id', $article_id);
+  $smarty->display("comment.tpl");
 }
 
 // vim: et:sta:ai:ts=2:sw=2:fen:fdm=indent:
