@@ -29,6 +29,8 @@ if($_POST['submit']) {
   $comment->write();
   $smarty->assign('info', 'Your comment: ' . $comment->get_comment());
   $smarty->assign('msg', 'Your comment has been regsitered');
+  $smarty->assign('page', 'article.php?id=' . $comment->get_article_id());
+  $smarty->assign('title', 'Article Page');
   $smarty->display('redirect.tpl');
 } else {
   // missing content id
