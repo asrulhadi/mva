@@ -1,9 +1,9 @@
 <?php
 /**
  * Part of Web Application Secure Coding - PHP
- * It is extremely insecure! Please do not use                                                                                        
- * this in any kind of production environment                 
- * 
+ * It is extremely insecure! Please do not use
+ * this in any kind of production environment
+ *
  * @author jackwillk
  * @created 2010
  *
@@ -19,7 +19,7 @@ require("libs/Smarty.class.php");
 
 function get_all_content() {
   $db = DB::get_instance();
-  $sql = "SELECT id FROM article ORDER BY date_created";
+  $sql = "SELECT id FROM article ORDER BY date_created DESC";
   $result = $db->query($sql);
   while($row=$db->fetch_assoc($result)) {
     $content_arr[] = new Article($row['id']);
