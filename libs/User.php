@@ -46,7 +46,7 @@ class User {
    */
   function login($username, $password) {
     $db = DB::get_instance();
-    $sql = "select * from user where username = '$username' and password = $password";
+    $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
     $result= $db->query($sql);
     if($db->count_rows($result)) {
       $row = $db->fetch_assoc($result);
@@ -66,7 +66,8 @@ class User {
   // This function checks to see if a user is logged in.
   function check_user_session() {
     session_start();
-    if($_SESSION['user_id'] && $_SESSION['username']) {
+    if(array_key_exists('user_id', $_SESSION) 
+      && array_key_exists('username', $_SESSION)) {
       return true;
     }
     return false;
