@@ -18,10 +18,10 @@ class Comment {
   private $date_created = null;
 
   function __construct($comment_id='', $comment='', $article_id='', $date_created='') {
-    $this->set_comment_id($comment_id);
-    $this->set_comment($comment);
-    $this->set_article_id($article_id);
-    $this->set_date_created($date_created);
+    // TODO: set comment_id
+    // TODO: set comment
+    // TODO: set article_id
+    // TODO: set date_created
   }
 
   function get_comment_id() {
@@ -62,7 +62,7 @@ class Comment {
       "( '" . $this->comment . "'" . 
       ", '" . $this->article_id . "'" . 
       ", '" . date("Y-m-d h:i:s") . "')";
-    $result = $db->query($sql);
+    // TODO: write to database
   }
 
 }

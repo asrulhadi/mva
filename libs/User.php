@@ -50,17 +50,17 @@ class User {
 		$result= $db->query($sql);
 		if($db->count_rows($result)) {
 			$row = $db->fetch_assoc($result);
-			$this->set_user_id($row['id']);
-			$this->set_username($row['username']);
-			$this->create_user_session();
+			// TODO: set user_id
+			// TODO: set username
+      // TODO: create user session
 		}
 	}
 
 	// This function is used to start a session and set initial variables
 	private function create_user_session() {
 		session_start();
-		$_SESSION['user_id'] = $this->get_user_id();
-		$_SESSION['username'] = $this->get_username();
+		// TODO: set the 'user_id' in $_SESSION
+		// TODO: set the 'username' in $_SESSION
 	}
 
 	// This function checks to see if a user is logged in.

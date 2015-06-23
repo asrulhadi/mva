@@ -23,10 +23,10 @@ class Article {
       $this->id = $article_id;
       $this->retrieve_content();
     } else {
-      $this->user_id = $user_id;
-      $this->title = $title;
-      $this->content = $content;
-      $this->date_created = $date_created;
+      // TODO: set user_id
+      // TODO: set title
+      // TODO: set content
+      // TODO: set date_created
     }
   }
 
@@ -42,8 +42,8 @@ class Article {
   function get_username() {
     $db = DB::get_instance();
     $sql = "SELECT username FROM user WHERE id = " . $this->user_id;
-    $result = $db->query($sql);
-    $row = $db->fetch_assoc($result);
+    // TODO: Query database
+    // TODO: Fetch the result
     return $row['username'];
   }
 
@@ -82,9 +82,9 @@ class Article {
   private function retrieve_content() {
     $db = DB::get_instance();
     $sql = "SELECT * FROM article WHERE id = " . $this->id;
-    $result = $db->query($sql);
-    $row = $db->fetch_assoc($result);
-    $this->__construct('', $row['user_id'], $row['title'], $row['content'], $row['date_created']);
+    // TODO: Query database
+    // TODO: Fetch the result
+    // TODO: contruct the article using result from query
   }
 
   function write() {
@@ -94,7 +94,7 @@ class Article {
       "'" . $this->title . "'," .
       "'" . $this->content . "'," . 
       "'" . date("Y-m-d h:i:s") . "')";
-    $result = $db->query($sql);
+    // TODO: write to database
   }
 
 }
