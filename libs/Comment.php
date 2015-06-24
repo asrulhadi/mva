@@ -58,10 +58,9 @@ class Comment {
 
   function write() {
     $db = DB::get_instance();
-    $sql = "INSERT INTO comment (comment, article_id, date_created) values " . 
+    $sql = "INSERT INTO comment (comment, article_id) VALUES " . 
       "( '" . $this->comment . "'" . 
-      ", '" . $this->article_id . "'" . 
-      ", '" . date("Y-m-d h:i:s") . "')";
+      ", '" . $this->article_id . "')";
     $result = $db->query($sql);
   }
 

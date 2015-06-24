@@ -1,13 +1,13 @@
 <?php
 /**
- * Part of Web Application Secure Coding - PHP 
- * It is extremely insecure! Please do not use 
+ * Part of Web Application Secure Coding - PHP
+ * It is extremely insecure! Please do not use
  * this in any kind of production environment
- * 
- * @author jackwillk 
- * @created 2010 
  *
- * @author asrulhadi 
+ * @author jackwillk
+ * @created 2010
+ *
+ * @author asrulhadi
  * @modified 2015
  */
 
@@ -89,11 +89,10 @@ class Article {
 
   function write() {
     $db = DB::get_instance();
-    $sql = "INSERT INTO article (user_id, title, content, date_created) values (" . 
+    $sql = "INSERT INTO article (user_id, title, content) VALUES (" . 
       "'" . $this->user_id . "'," . 
       "'" . $this->title . "'," .
-      "'" . $this->content . "'," . 
-      "'" . date("Y-m-d h:i:s") . "')";
+      "'" . $this->content . "')";
     $result = $db->query($sql);
   }
 
