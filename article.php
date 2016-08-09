@@ -24,12 +24,13 @@ $db = DB::get_instance();
 
 function get_all_comments($id) {
   $db = DB::get_instance();
+  $comment_arr = [];
   $sql = "SELECT * FROM comment WHERE article_id = '$id' ORDER BY date_created";
   $result = $db->query($sql);
   while($row = $db->fetch_assoc($result)) {
     $r_id = $row['id'];
     $r_cmt = $row['comment'];
-    $r_cnt = $row['content_id'];
+    $r_cnt = $row['article_id'];
     $r_date = $row['date_created'];
     $comment_arr[] = new Comment($r_id, $r_cmt, $r_cnt, $r_date);
   }

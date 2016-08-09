@@ -28,7 +28,7 @@ if ($user->get_user_id()) {
   $page = "redirect.tpl";
 }
 
-if ($_POST['submit']) {
+if (isset($_POST['submit'])) {
   $user->login($_POST['username'], $_POST['password']);
   if($user->get_user_id()) {
     // successfully login. Goto home page

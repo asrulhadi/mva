@@ -21,6 +21,7 @@ function get_all_article($keyword) {
   $db = DB::get_instance();
   $sql = "SELECT id FROM article WHERE title LIKE '%$keyword%' or content LIKE '%$keyword%'";
   $result = $db->query($sql);
+  $content_arr = [];
   while($row=$db->fetch_assoc($result)) {
     $content_arr[] = new Article($row['id']);
   }
@@ -29,11 +30,13 @@ function get_all_article($keyword) {
 
 $key = $_GET['q'];
 // display the result or indicate no article found
+// defaulting to null
+$articles = [];
 if ( isSet($key) && ( $key != "" )  ) {
   $articles = get_all_article($key);
-  $smarty->assign('keyword', $key);
-  $smarty->assign('articles', $articles);
 }
+$smarty->assign('keyword', $key);
+$smarty->assign('articles', $articles);
 $smarty->assign('found', count($articles));
 $smarty->display("search.tpl");
 

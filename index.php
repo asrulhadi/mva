@@ -21,6 +21,7 @@ function get_all_content() {
   $db = DB::get_instance();
   $sql = "SELECT id FROM article ORDER BY date_created DESC";
   $result = $db->query($sql);
+  $content_arr = [];
   while($row=$db->fetch_assoc($result)) {
     $content_arr[] = new Article($row['id']);
   }

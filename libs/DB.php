@@ -12,22 +12,30 @@
  *
  */
 
+include_once('configs/settings.php');
+
 class DB {
   /**
    * This class provides the barest wrapper for MySQL
    */
-  private $host = "localhost";
-  private $username = "root";
-  private $password = "toor";
-  private $db_name = "insecure";
+  
+  private $host;
+  private $username;
+  private $password;
+  private $db_name;
   private static $instance;
 
   private function __construct() {
+	global $db;
+	$this->host = $db['host'];
+	$this->username = $db['username'];
+	$this->password = $db['password'];
+	$this->db_name = $db['name'];
     $this->connect();
   }
 
   function connect() {
-    $this->connection = mysqli_connect($this->host, $this->username, $this->password);
+	$this->connection = mysqli_connect($this->host, $this->username, $this->password);
     if(!$this->connection) {
       echo(mysqli_error());
     }

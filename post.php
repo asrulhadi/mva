@@ -20,7 +20,7 @@ require("libs/Smarty.class.php");
 $smarty = new Smarty();
 $db = DB::get_instance();
 
-if($_POST['submit']) {
+if(isset($_POST['submit'])) {
   // create new article
   $content = new Article();
   $content->set_user_id($_POST['user_id']);
