@@ -46,8 +46,21 @@ class User {
    */
   function login($username, $password) {
     $db = DB::get_instance();
-    $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
-    $result= $db->query($sql);
+	// avoid SQLi using prepared statement / bind variable
+	// 1. prepared the statement with ? will be replaced / bind
+	if (!($stmt = $db->connection->prepare("SELECT * FROM user WHERE username=? AND password=?"))) {
+		die("Prepare failed: (" . $db->errno . ") " . $db->error);
+	}
+	// 2. Bind the two string parameters --> ss
+ 	if (!$stmt->bind_param("ss", $username,$password)) {
+		die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
+	}
+	// 3. execute the query
+	if (!$stmt->execute()) {
+		echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+	}
+	// 4. get the result
+    $result= $stmt->get_result();
     if($db->count_rows($result)) {
       $row = $db->fetch_assoc($result);
       $this->set_user_id($row['id']);
