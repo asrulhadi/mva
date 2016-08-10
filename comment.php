@@ -21,7 +21,7 @@ $user = new User();
 $smarty = new Smarty();
 $db = DB::get_instance();
 
-if($_POST['submit']) {
+if(isset($_POST['submit'])) {
   // save the comment
   $comment = new Comment();
   $comment->set_comment($_POST['comment']);
