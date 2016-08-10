@@ -37,7 +37,7 @@ function get_all_comments($id) {
   return $comment_arr;
 }
 
-if( isset($_GET['id']) ) {
+if(isset($_GET['id'])) {
   $article_id = intval($_GET['id']);
   // Display the article
   $article = new Article($article_id);
