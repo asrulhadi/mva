@@ -48,11 +48,11 @@ class User {
     $db = DB::get_instance();
 	// avoid SQLi using prepared statement / bind variable
 	// 1. prepared the statement with ? will be replaced / bind
-	if (!($stmt = $db->connection->prepare("SELECT * FROM user WHERE username=? AND password=?"))) {
+	if (!($stmt = $db->connection->prepare("SELECT id, username, password FROM user WHERE username=?"))) {
 		die("Prepare failed: (" . $db->errno . ") " . $db->error);
 	}
 	// 2. Bind the two string parameters --> ss
- 	if (!$stmt->bind_param("ss", $username,$password)) {
+ 	if (!$stmt->bind_param("s", $username)) {
 		die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
 	}
 	// 3. execute the query
@@ -63,9 +63,12 @@ class User {
     $result= $stmt->get_result();
     if($db->count_rows($result)) {
       $row = $db->fetch_assoc($result);
-      $this->set_user_id($row['id']);
-      $this->set_username($row['username']);
-      $this->create_user_session();
+	  // check if password is correct or not
+	  if ( password_verify($password, $row['password']) ) {
+		  $this->set_user_id($row['id']);
+		  $this->set_username($row['username']);
+		  $this->create_user_session();
+	  }
     }
   }
 

@@ -50,7 +50,8 @@ if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
 	
 	$msg .= "Creating user <table class='table'><tr><th>Username</th><th>Password</th></tr>";
 	foreach ($user as $name => $pass) {
-		$link->query("INSERT INTO user (username,password) VALUES ('$name','$pass')");
+		$crypt = password_hash($pass,PASSWORD_DEFAULT);
+		$link->query("INSERT INTO user (username,password) VALUES ('$name','$crypt')");
 		$msg .= "<tr><td>$name</td><td>$pass</td></tr>";
 	}
 	$msg .= "</table>";
