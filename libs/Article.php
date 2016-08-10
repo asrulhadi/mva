@@ -20,7 +20,7 @@ class Article {
 
   function __construct($article_id = '', $user_id = '', $title = '', $content = '', $date_created = '') {
     if($article_id) {
-      $this->id = $article_id;
+      $this->id = intval($article_id);	// sanitize to integer
       $this->retrieve_content();
     } else {
       $this->user_id = $user_id;
@@ -35,7 +35,7 @@ class Article {
   }
 
   function set_id($article_id) {
-    $this->id = $article_id;
+    $this->id = $article_id;	// generated id
   }
 
   // retrieve username from database
@@ -52,11 +52,11 @@ class Article {
   }
 
   function set_user_id($user_id) {
-    $this->user_id = $user_id;
+    $this->user_id = intval($user_id);	// sanitize to integer
   }
 
   function get_title() {
-    return $this->title;
+    return htmlentities($this->title);
   }
 
   function set_title($title) {
@@ -64,7 +64,7 @@ class Article {
   }
 
   function get_content() {
-    return $this->content;
+    return htmlentities($this->content);
   }
 
   function set_content($content) {
@@ -81,7 +81,7 @@ class Article {
 
   private function retrieve_content() {
     $db = DB::get_instance();
-    $sql = "SELECT * FROM article WHERE id = " . $this->id;
+    $sql = "SELECT * FROM article WHERE id = " . intval($this->id); // make sure integer no SQLi
     $result = $db->query($sql);
     $row = $db->fetch_assoc($result);
     $this->__construct('', $row['user_id'], $row['title'], $row['content'], $row['date_created']);
@@ -89,11 +89,11 @@ class Article {
 
   function write() {
     $db = DB::get_instance();
-    $sql = "INSERT INTO article (user_id, title, content) VALUES (" . 
-      "'" . $this->user_id . "'," . 
-      "'" . $this->title . "'," .
-      "'" . $this->content . "')";
-    $result = $db->query($sql);
+	// using prepared statement --> no limit on title and content --> for SQLi only, XSS need another procedure
+	$stmt = $db->connection->prepare("INSERT INTO article (user_id, title, content) VALUES (?,?,?)");
+	$stmt->bind_param("iss", $this->user_id, $this->title, $this->content);
+	$stmt->execute();
+    $result = $stmt->get_result();
   }
 
 }
