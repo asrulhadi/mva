@@ -21,7 +21,7 @@ $user = new User();
 $smarty = new Smarty();
 $db = DB::get_instance();
 
-if($_POST['submit']) {
+if(isset($_POST['submit'])) {
   // save the comment
   $comment = new Comment();
   $comment->set_comment($_POST['comment']);
@@ -37,7 +37,7 @@ if($_POST['submit']) {
   $smarty->display('redirect.tpl');
 } else {
   // missing content id
-  $article_id = $_GET['article_id'];
+  $article_id = intval($_GET['article_id']);	// make sure article_id is integer --> SQLi
   if(!$article_id) {
     echo("Missing content id");
     exit();
