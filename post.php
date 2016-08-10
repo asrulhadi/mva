@@ -20,10 +20,16 @@ require("libs/Smarty.class.php");
 $smarty = new Smarty();
 $db = DB::get_instance();
 
+// only can be access by logged in user
+$user = new User();
+if (! $user->get_user_id() ) {
+	header("Location:index.php");
+}
+
 if(isset($_POST['submit'])) {
   // create new article
   $content = new Article();
-  $content->set_user_id($_POST['user_id']);
+  $content->set_user_id($user->get_user_id());	// get from session .. do not trust user
   $content->set_title($_POST['title']);
   $content->set_content($_POST['content']);
   // write article to database
@@ -33,7 +39,7 @@ if(isset($_POST['submit'])) {
   $smarty->display('redirect.tpl');
 } else {
   // display form to post message
-  $user = new User();
+  // $user = new User();
   $smarty->assign('user_id', $user->get_user_id());
   $smarty->display("post.tpl");
 }
