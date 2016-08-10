@@ -11,12 +11,15 @@
  * @modified 2015
  */
 
+require_once "libs/htmlpurifier/HTMLPurifier.auto.php";
+ 
 class Article {
   private $id = null;
   private $user_id = null;
   private $title = null;
   private $content = null;
   private $date_created = null;
+  private $purifier = null;
 
   function __construct($article_id = '', $user_id = '', $title = '', $content = '', $date_created = '') {
     if($article_id) {
@@ -28,6 +31,8 @@ class Article {
       $this->content = $content;
       $this->date_created = $date_created;
     }
+	$config = HTMLPurifier_Config::createDefault();
+	$this->purifier = new HTMLPurifier($config);
   }
 
   function get_id() {
@@ -56,7 +61,7 @@ class Article {
   }
 
   function get_title() {
-    return htmlentities($this->title);
+    return $this->purifier->purify($this->title);
   }
 
   function set_title($title) {
@@ -64,7 +69,7 @@ class Article {
   }
 
   function get_content() {
-    return htmlentities($this->content);
+    return $this->purifier->purify($this->content);
   }
 
   function set_content($content) {
