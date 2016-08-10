@@ -37,8 +37,8 @@ function get_all_comments($id) {
   return $comment_arr;
 }
 
-$article_id = $_GET['id'];
-if($article_id) {
+if(isset($_GET['id'])) {
+  $article_id = intval($_GET['id']);
   // Display the article
   $article = new Article($article_id);
   $smarty->assign('id', $article->get_id());
