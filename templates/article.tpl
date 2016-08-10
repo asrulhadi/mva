@@ -9,7 +9,7 @@
     <div class="list-group-item-heading">Comments</div>
     {foreach $comments as $comment}
       <div class="list-group-item">
-        <div>{$comment->get_comment()}
+        <div>{$comment->get_comment()|escape:'html'}
         <div class="blog-comment">{$comment->get_date_created()}</div></div>
       </div>
     {/foreach}
