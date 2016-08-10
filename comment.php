@@ -27,7 +27,10 @@ if($_POST['submit']) {
   $comment->set_comment($_POST['comment']);
   $comment->set_article_id($_POST['article_id']);
   $comment->write();
-  $smarty->assign('info', 'Your comment: ' . $comment->get_comment());
+  $cmt = htmlentities($comment->get_comment(),ENT_QUOTES|ENT_HTML5);
+  // preventing XSS in this file but not in article.php which will also display comments
+  // See http://php.net/manual/en/function.htmlentities.php for more details
+  $smarty->assign('info', 'Your comment: ' . $cmt);
   $smarty->assign('msg', 'Your comment has been regsitered');
   $smarty->assign('page', 'article.php?id=' . $comment->get_article_id());
   $smarty->assign('title', 'Article Page');
