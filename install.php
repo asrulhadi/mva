@@ -67,4 +67,5 @@ $template = "{extends file='page.tpl'}{block name='utama'}<div>". $msg . "</div>
 $smarty = new Smarty;
 $smarty->display("eval:base64:". base64_encode($template));
 
+// vim: et:sta:ai:ts=2:sw=2:fen:fdm=indent:
 ?>
