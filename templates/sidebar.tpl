@@ -1,6 +1,7 @@
 {if isset($smarty.session.user_id)}
 <div class="sidebar-module">
   <h4>Welcome {$smarty.session.username}</h4>
+  <img src="avatar/{$smarty.session.avatar}" height='75' width='75' />
   <ol class="list-unstyled">
     <li><a href="post.php">Post Article</a></li>
   </ol>
@@ -8,10 +9,14 @@
 {else}
 <div class="sidebar-module sidebar-module-inset">
   <h4>About</h4>
-  <p>Vulnerable Web Application. <em>Do not host publicly</em>You have been warned!!!</p>
+  <p>
+    <div>Vulnerable Web Application</div>
+    <em>Do not host publicly</em>
+    <div class="warning">You have been warned!!!</div>
+  </p>
 </div>
 {/if}
-<div class="sidebar-module">
+<!-- div class="sidebar-module">
   <h4>Archives</h4>
   <ol class="list-unstyled">
     <li><a href="#">March 2014</a></li>
@@ -19,12 +24,12 @@
     <li><a href="#">January 2014</a></li>
     <li><a href="#">December 2013</a></li>
   </ol>
-</div>
+</div -->
 <div class="sidebar-module">
   <h4>Elsewhere</h4>
   <ol class="list-unstyled">
-    <li><a href="#">GitHub</a></li>
-    <li><a href="#">Twitter</a></li>
-    <li><a href="#">Facebook</a></li>
+    <li><a href="https://github.com/asrulhadi/mva">GitHub</a></li>
+    <li><a href="http://php.net/manual/en/security.php">PHP Security</a></li>
+    <li><a href="http://htmlpurifier.org/">HTML Purifier</a></li>
   </ol>
 </div>

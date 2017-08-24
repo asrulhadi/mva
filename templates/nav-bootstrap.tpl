@@ -10,6 +10,7 @@
       {if isset($smarty.session.username)}
         <a class="blog-nav-item blog-nav-item-right" href="logout.php">Logout</a>
       {else}
+        <a class="blog-nav-item blog-nav-item-right" href="signup.php">Signup</a>
         <a class="blog-nav-item blog-nav-item-right" href="login.php">Login</a>
       {/if}
       {/block}

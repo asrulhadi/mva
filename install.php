@@ -1,9 +1,9 @@
 <?php
 
 $user = array(
-	"Alice" => 'p455w0rd',
-	'Bob' => 'DualPhone',
-	'Eve' => 'Hacker'
+	"Alice" => array('pass' => 'p455w0rd', 'avatar' => 'alice.jpg'),
+	'Bob' => array('pass' => 'DualPhone', 'avatar' => 'bob.jpg'),
+	'Eve' => array('pass' => 'Hacker', 'avatar' => 'eve.jpg')
 );
 
 if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
@@ -27,7 +27,7 @@ if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
 	$msg .= '<div class="bg-'. $cl .'">Database ' . $db['name'] . $err . " created</div>";
 	$link->select_db($db['name']);
 	
-	if ($link->query("CREATE TABLE user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(16), password VARCHAR(64))")) {
+	if ($link->query("CREATE TABLE user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(16), password VARCHAR(64), avatar VARCHAR(128))")) {
 		$cl = "success"; $err = "";
 	} else {
 		$cl = "danger"; $err = $link->error;
@@ -49,8 +49,10 @@ if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
 	$msg .= '<div class="bg-'. $cl .'">Table comment created' . $err . '</div>';
 	
 	$msg .= "Creating user <table class='table'><tr><th>Username</th><th>Password</th></tr>";
-	foreach ($user as $name => $pass) {
-		$link->query("INSERT INTO user (username,password) VALUES ('$name','$pass')");
+  foreach ($user as $name => $data) {
+    $pass = $data['pass'];
+    $avatar = $data['avatar'];
+		$link->query("INSERT INTO user (username,password,avatar) VALUES ('$name','$pass','$avatar')");
 		$msg .= "<tr><td>$name</td><td>$pass</td></tr>";
 	}
 	$msg .= "</table>";
