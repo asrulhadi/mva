@@ -43,7 +43,8 @@ if (isset($_GET['mode']) && !empty($_GET['mode'])) {
     if (isset($_GET['target']) && !empty($_GET['target']) && is_readable($_GET['target'])) {
       $target = $_GET['target'];
       if (is_dir($target) && ($dirs = scandir($target))) {
-        unset($odirs);
+        $odirs = array();
+        $oimgs = array();
         // read files in dir
         foreach ( $dirs as $dir ) {
           if ($dir === '.' || $dir === '..') { continue; }
@@ -55,10 +56,11 @@ if (isset($_GET['mode']) && !empty($_GET['mode'])) {
           }
           // only display if image
           if (is_file($f) && is_readable($f) && substr(mime_content_type($f),0,5) === "image" ) {
-            $odirs[] = array('name' => $dir, 'src' => $f);
+            $oimgs[] = array('name' => $dir, 'src' => $f);
           }
         }
-        $smarty->assign('dirs', $odirs);
+        if (count($odirs)) $smarty->assign('dirs', $odirs);
+        if (count($oimgs)) $smarty->assign('imgs', $oimgs);
       } else {
         $smarty->assign('error','Not a directory');
       }
