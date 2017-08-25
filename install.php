@@ -1,9 +1,9 @@
 <?php
 
 $user = array(
-	"Alice" => array('pass' => 'p455w0rd', 'avatar' => 'alice.jpg'),
-	'Bob' => array('pass' => 'DualPhone', 'avatar' => 'bob.jpg'),
-	'Eve' => array('pass' => 'Hacker', 'avatar' => 'eve.jpg')
+	"Alice" => array('pass' => 'p455w0rd', 'avatar' => 'alice.jpg', 'admin' => True),
+	'Bob' => array('pass' => 'DualPhone', 'avatar' => 'bob.jpg', 'admin' => False),
+	'Eve' => array('pass' => 'Hacker', 'avatar' => 'eve.jpg', 'admin' => False)
 );
 
 if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
@@ -27,7 +27,7 @@ if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
 	$msg .= '<div class="bg-'. $cl .'">Database ' . $db['name'] . $err . " created</div>";
 	$link->select_db($db['name']);
 	
-	if ($link->query("CREATE TABLE user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(16), password VARCHAR(64), avatar VARCHAR(128))")) {
+	if ($link->query("CREATE TABLE user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(16), password VARCHAR(64), avatar VARCHAR(128), admin BOOLEAN)")) {
 		$cl = "success"; $err = "";
 	} else {
 		$cl = "danger"; $err = $link->error;
@@ -52,7 +52,8 @@ if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
   foreach ($user as $name => $data) {
     $pass = $data['pass'];
     $avatar = $data['avatar'];
-		$link->query("INSERT INTO user (username,password,avatar) VALUES ('$name','$pass','$avatar')");
+    $admin = $data['admin'];
+		$link->query("INSERT INTO user (username,password,avatar,admin) VALUES ('$name','$pass','$avatar','$admin')");
 		$msg .= "<tr><td>$name</td><td>$pass</td></tr>";
 	}
 	$msg .= "</table>";

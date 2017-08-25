@@ -16,15 +16,16 @@
   </p>
 </div>
 {/if}
-<!-- div class="sidebar-module">
-  <h4>Archives</h4>
+{if ($smarty.session.admin)}
+<div class="sidebar-module">
+  <h4>Admin Modules</h4>
   <ol class="list-unstyled">
-    <li><a href="#">March 2014</a></li>
-    <li><a href="#">February 2014</a></li>
-    <li><a href="#">January 2014</a></li>
-    <li><a href="#">December 2013</a></li>
+    <li><a href="install.php?install=yes">Reset Database</a></li>
+    <li><a href="admin.php">Manage Users</a></li>
+    <li><a href="admin.php">Manage Articles</a></li>
   </ol>
-</div -->
+</div>
+{/if}
 <div class="sidebar-module">
   <h4>Elsewhere</h4>
   <ol class="list-unstyled">
