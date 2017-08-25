@@ -4,7 +4,7 @@
 - Edit the parameters in configs/settings.php
 - Create database user
   - sudo mysql mysql < create_user.sql
-- Change permission of directory 'templates_c' to writable
-  - chmod a+w templates_c
+- Change permission of directories 'templates_c' and 'avatar' to writable
+  - chmod a+w templates_c avatar
 - Run install.php to setup the database
 
