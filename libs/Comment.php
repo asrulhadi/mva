@@ -29,7 +29,7 @@ class Comment {
   }
 
   function set_comment_id($comment_id) {
-    $this->comment_id = $comment_id;
+    $this->comment_id = intval($comment_id);  // make sure integer only
   }
 
   function get_comment() {
@@ -45,7 +45,7 @@ class Comment {
   }
 
   function set_article_id($id) {
-    $this->article_id = $id;
+    $this->article_id = intval($id);    // make sure integer only
   }
 
   function get_date_created() {
@@ -59,8 +59,8 @@ class Comment {
   function write() {
     $db = DB::get_instance();
     $sql = "INSERT INTO comment (comment, article_id) VALUES " . 
-      "( '" . $this->comment . "'" . 
-      ", '" . $this->article_id . "')";
+      "( '" . $db->connection->real_escape_string($this->comment) . "'" .   // using escape string from db
+      ", '" . $this->article_id . "')";   // sanitized during set
     $result = $db->query($sql);
   }
 
