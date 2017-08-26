@@ -21,7 +21,7 @@ class Article {
   function __construct($article_id='') {
     if (!empty($article_id)) {
       // called to retrieve existing article
-      $this->id = $article_id;
+      $this->id = intval($article_id);  // make sure integer
       if (! $this->retrieve_content()) {
         throw new Exception('Cannot find');
       }
@@ -39,7 +39,7 @@ class Article {
   // retrieve username from database
   function get_username() {
     $db = DB::get_instance();
-    $sql = "SELECT username FROM user WHERE id = " . $this->user_id;
+    $sql = "SELECT username FROM user WHERE id = " . intval($this->user_id);  // also make integer
     $result = $db->query($sql);
     $row = $db->fetch_assoc($result);
     return $row['username'];
@@ -79,7 +79,7 @@ class Article {
 
   private function retrieve_content() {
     $db = DB::get_instance();
-    $sql = "SELECT * FROM article WHERE id = " . $this->id;
+    $sql = "SELECT * FROM article WHERE id = " . $this->id;    // should be sanitized already
     $result = $db->query($sql);
     if (mysqli_num_rows($result)) {
       $row = $db->fetch_assoc($result);
@@ -95,11 +95,11 @@ class Article {
 
   function write() {
     $db = DB::get_instance();
-    $sql = "INSERT INTO article (user_id, title, content) VALUES (" . 
-      "'" . $this->user_id . "'," . 
-      "'" . $this->title . "'," .
-      "'" . $this->content . "')";
-    $result = $db->query($sql);
+    // using prepared statement --> no limit on title and content --> for SQLi only, XSS need another procedure
+    $stmt = $db->connection->prepare("INSERT INTO article (user_id, title, content) VALUES (?,?,?)");
+    $stmt->bind_param("iss", $this->user_id, $this->title, $this->content);
+    $stmt->execute();
+    $result = $stmt->get_result();    
   }
 
 }
