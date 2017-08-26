@@ -21,7 +21,9 @@
         </div><!-- /blog-sidebar -->
       </div><!-- /row -->
     </div><!-- /container -->
-
     {include file='footer-bootstrap.tpl'}
+    <script lang='script/javascript'>
+    {block name='run-script'}{/block}
+    </script>
   </body>
 </html>

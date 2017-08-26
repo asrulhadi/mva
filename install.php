@@ -1,9 +1,9 @@
 <?php
 
 $user = array(
-	"Alice" => 'p455w0rd',
-	'Bob' => 'DualPhone',
-	'Eve' => 'Hacker'
+	"Alice" => array('pass' => 'p455w0rd', 'avatar' => 'alice.jpg', 'admin' => True),
+	'Bob' => array('pass' => 'DualPhone', 'avatar' => 'bob.jpg', 'admin' => False),
+	'Eve' => array('pass' => 'Hacker', 'avatar' => 'eve.jpg', 'admin' => False)
 );
 
 if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
@@ -27,7 +27,7 @@ if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
 	$msg .= '<div class="bg-'. $cl .'">Database ' . $db['name'] . $err . " created</div>";
 	$link->select_db($db['name']);
 	
-	if ($link->query("CREATE TABLE user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(16), password VARCHAR(64))")) {
+	if ($link->query("CREATE TABLE user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(16), password VARCHAR(64), avatar VARCHAR(128), admin BOOLEAN)")) {
 		$cl = "success"; $err = "";
 	} else {
 		$cl = "danger"; $err = $link->error;
@@ -49,8 +49,11 @@ if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
 	$msg .= '<div class="bg-'. $cl .'">Table comment created' . $err . '</div>';
 	
 	$msg .= "Creating user <table class='table'><tr><th>Username</th><th>Password</th></tr>";
-	foreach ($user as $name => $pass) {
-		$link->query("INSERT INTO user (username,password) VALUES ('$name','$pass')");
+  foreach ($user as $name => $data) {
+    $pass = $data['pass'];
+    $avatar = $data['avatar'];
+    $admin = $data['admin'];
+		$link->query("INSERT INTO user (username,password,avatar,admin) VALUES ('$name','$pass','$avatar','$admin')");
 		$msg .= "<tr><td>$name</td><td>$pass</td></tr>";
 	}
 	$msg .= "</table>";
@@ -67,4 +70,5 @@ $template = "{extends file='page.tpl'}{block name='utama'}<div>". $msg . "</div>
 $smarty = new Smarty;
 $smarty->display("eval:base64:". base64_encode($template));
 
+// vim: et:sta:ai:ts=2:sw=2:fen:fdm=indent:
 ?>

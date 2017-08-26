@@ -26,16 +26,16 @@ class DB {
   private static $instance;
 
   private function __construct() {
-	global $db;
-	$this->host = $db['host'];
-	$this->username = $db['username'];
-	$this->password = $db['password'];
-	$this->db_name = $db['name'];
+    global $db;
+    $this->host = $db['host'];
+    $this->username = $db['username'];
+    $this->password = $db['password'];
+    $this->db_name = $db['name'];
     $this->connect();
   }
 
   function connect() {
-	$this->connection = mysqli_connect($this->host, $this->username, $this->password);
+    $this->connection = mysqli_connect($this->host, $this->username, $this->password);
     if(!$this->connection) {
       echo(mysqli_error());
     }

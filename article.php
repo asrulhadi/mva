@@ -39,15 +39,19 @@ function get_all_comments($id) {
 
 $article_id = $_GET['id'];
 if($article_id) {
-  // Display the article
-  $article = new Article($article_id);
-  $smarty->assign('id', $article->get_id());
-  $smarty->assign('title', $article->get_title());
-  $smarty->assign('date_created', $article->get_date_created());
-  $smarty->assign('username', $article->get_username());
-  $smarty->assign('content', $article->get_content());
-  $smarty->assign('comments', get_all_comments($article_id));
-  $smarty->display("article.tpl");
+  try {
+    // Display the article
+    $article = new Article($article_id);
+    $smarty->assign('id', $article->get_id());
+    $smarty->assign('title', $article->get_title());
+    $smarty->assign('date_created', $article->get_date_created());
+    $smarty->assign('username', $article->get_username());
+    $smarty->assign('content', $article->get_content());
+    $smarty->assign('comments', get_all_comments($article_id));
+    $smarty->display("article.tpl");
+  } catch (Exception $e) {
+    $smarty->display("redirect.tpl");
+  }
 } else {
   // no article id ==> redirect to homepage
   $smarty->display("redirect.tpl");
