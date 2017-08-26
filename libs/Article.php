@@ -18,11 +18,13 @@ class Article {
   private $content = null;
   private $date_created = null;
 
-  function __construct($article_id) {
-    // called to retrieve existing article
-    $this->id = $article_id;
-    if (! $this->retrieve_content()) {
-      throw new Exception('Cannot find');
+  function __construct($article_id='') {
+    if (!empty($article_id)) {
+      // called to retrieve existing article
+      $this->id = $article_id;
+      if (! $this->retrieve_content()) {
+        throw new Exception('Cannot find');
+      }
     }
   }
   
