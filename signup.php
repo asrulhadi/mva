@@ -64,9 +64,11 @@ if (isset($_POST['register']) &&
   }
   if (! $error) {
     // create user
-    $sql = "INSERT INTO user (username,password,avatar) VALUES ('$name','$pass','$avatar')";
-    $res = $db->query($sql);
-    if ( $res ) {
+    $stmt = $db->connection->prepare("INSERT INTO user (username,password,avatar) VALUES (?,?,?)");
+    $stmt->bind_param("sss",$name,$pass,$avatar);
+    $stmt->execute();
+    $res = $stmt->errno;
+    if ( ! $res ) {
       // successfully register
       $smarty->assign("msg","You ($name) have been registered. Avatar: $avatar ");
       $page = "redirect.tpl";
