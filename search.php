@@ -28,7 +28,8 @@ function get_all_article($keyword) {
   return $content_arr;
 }
 
-$key = $_GET['q'];
+// need to sanitise q - allow alphanumerique + special charactere (encoding ' " <)
+$key = filter_input(INPUT_GET,'q', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
 // display the result or indicate no article found
 // defaulting to null
 $articles = [];
