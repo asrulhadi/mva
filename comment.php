@@ -34,7 +34,7 @@ if(isset($_POST['submit'])) {
   $smarty->display('redirect.tpl');
 } else {
   // missing content id
-  $article_id = $_GET['article_id'];
+  $article_id = intval($_GET['article_id']);  // make sure article_id is integer
   if(!$article_id) {
     echo("Missing content id");
     exit();
