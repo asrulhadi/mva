@@ -18,18 +18,14 @@ class Article {
   private $content = null;
   private $date_created = null;
 
-  function __construct($article_id = '', $user_id = '', $title = '', $content = '', $date_created = '') {
-    if($article_id) {
-      $this->id = $article_id;
-      $this->retrieve_content();
-    } else {
-      $this->user_id = $user_id;
-      $this->title = $title;
-      $this->content = $content;
-      $this->date_created = $date_created;
+  function __construct($article_id) {
+    // called to retrieve existing article
+    $this->id = $article_id;
+    if (! $this->retrieve_content()) {
+      throw new Exception('Cannot find');
     }
   }
-
+  
   function get_id() {
     return $this->id;
   }
@@ -83,8 +79,16 @@ class Article {
     $db = DB::get_instance();
     $sql = "SELECT * FROM article WHERE id = " . $this->id;
     $result = $db->query($sql);
-    $row = $db->fetch_assoc($result);
-    $this->__construct('', $row['user_id'], $row['title'], $row['content'], $row['date_created']);
+    if (mysqli_num_rows($result)) {
+      $row = $db->fetch_assoc($result);
+      $this->user_id = $row['user_id'];
+      $this->title = $row['title'];
+      $this->content = $row['content'];
+      $this->date_created = $row['date_created'];
+    } else {
+      return False;
+    }
+    return True;
   }
 
   function write() {
