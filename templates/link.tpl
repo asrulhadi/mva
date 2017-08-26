@@ -67,3 +67,8 @@
   {/if} <!-- end of dir mode -->
 {/if} <!-- end of content -->
 {/block}
+{block name='run-script'}
+$(".blog-nav-item").removeClass("active");
+{if ($mode == "file")} $("#Owasp").addClass("active"); {/if}
+{if ($mode == "dir")} $("#Gallery").addClass("active"); {/if}
+{/block}
