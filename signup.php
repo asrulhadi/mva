@@ -55,10 +55,20 @@ if (isset($_POST['register']) &&
     if (isset($_FILES['avatar']) && !empty($_FILES['avatar']['name'])) {
       $avatar = basename($_FILES['avatar']['name']);
       $tmpfile = $_FILES['avatar']['tmp_name'];
-      if (move_uploaded_file($tmpfile, "$dir/avatar/$avatar")) {
+      // make sure it is an image
+      // $_FILES['avatar']['mime'] <== cannot be trusted. Controlled by client
+      if (substr(mime_content_type($tmpfile),0,5) !== "image" ) {
+          $error = True;
+          $errmsg = "Not an image";
       } else {
-        $error = True;
-        $errmsg = "File upload error";
+        // generate new name -- avoid double extension vulnerability
+        $ext = strrchr($avatar,".");
+        $avatar = strtr(base64_encode(sha1($avatar, True)."@"),array("+"=>"_","/"=>"-")) . $ext;
+        if (move_uploaded_file($tmpfile, "$dir/avatar/$avatar")) {
+        } else {
+          $error = True;
+          $errmsg = "File upload error";
+        }
       }
     }
   }
