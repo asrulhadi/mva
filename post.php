@@ -30,7 +30,7 @@ if (! $user->get_user_id()) {
 if(isset($_POST['submit'])) {
   // create new article
   $content = new Article();
-  $content->set_user_id($_POST['user_id']);
+  $content->set_user_id($user->get_user_id());  // take from session. Client data cannot be trusted
   $content->set_title($_POST['title']);
   $content->set_content($_POST['content']);
   // write article to database
