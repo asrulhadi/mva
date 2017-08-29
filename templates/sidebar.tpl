@@ -1,6 +1,6 @@
 {if isset($smarty.session.user_id)}
 <div class="sidebar-module">
-  <h4>Welcome {$smarty.session.username}</h4>
+  <h4>Welcome {$smarty.session.username|escape:'htmlall'}</h4>
   <img src="avatar/{$smarty.session.avatar}" height='75' width='75' />
   <ol class="list-unstyled">
     <li><a href="post.php">Post Article</a></li>

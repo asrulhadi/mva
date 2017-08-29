@@ -2,7 +2,7 @@
 {block name='utama'}
   <div class="blog-post">
     <h2 class="blog-post-title">{$title}</h2>
-    <p class="blog-post-meta">{$date_created} by <a href="#">{$username}</a></p>
+    <p class="blog-post-meta">{$date_created} by <a href="#">{$username|escape:'htmlall'}</a></p>
     {$content}
     <hr>
     <div class="list-group">
