@@ -20,6 +20,13 @@ require("libs/Smarty.class.php");
 $smarty = new Smarty();
 $db = DB::get_instance();
 
+// this is need an authenticated user
+$user = new User();
+if (! $user->get_user_id()) {
+  // not logged in yet. Redirecting to home
+  header("Location:index.php");
+}
+
 if(isset($_POST['submit'])) {
   // create new article
   $content = new Article();
@@ -33,7 +40,6 @@ if(isset($_POST['submit'])) {
   $smarty->display('redirect.tpl');
 } else {
   // display form to post message
-  $user = new User();
   $smarty->assign('user_id', $user->get_user_id());
   $smarty->display("post.tpl");
 }

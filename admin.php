@@ -16,6 +16,11 @@ require("libs/Smarty.class.php");
 
 $user = new User();
 
+// this page need authenticated user and admin privilege
+if ( !($user->get_user_id() && $user->is_admin()) ) {
+  header("Location:index.php");
+}
+
 $smarty = new Smarty;
 
 $msg = "This page only for authenticated admin only";
