@@ -9,6 +9,7 @@
  * @created 2015
  */
 
+session_start(); session_destroy(); // need to destroy session to really log out
 unset($_COOKIE['PHPSESSID']);
 session_start();
 
