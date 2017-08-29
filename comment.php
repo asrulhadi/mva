@@ -24,10 +24,10 @@ $db = DB::get_instance();
 if(isset($_POST['submit'])) {
   // save the comment
   $comment = new Comment();
-  $comment->set_comment($_POST['comment']);
+  $comment->set_comment($_POST['comment']);       // save the comment as it is
   $comment->set_article_id($_POST['article_id']);
   $comment->write();
-  $smarty->assign('info', 'Your comment: ' . $comment->get_comment());
+  $smarty->assign('info', 'Your comment: ' . htmlentities($comment->get_comment()));  // but sanitize when display
   $smarty->assign('msg', 'Your comment has been regsitered');
   $smarty->assign('page', 'article.php?id=' . $comment->get_article_id());
   $smarty->assign('title', 'Article Page');

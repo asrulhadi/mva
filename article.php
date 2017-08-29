@@ -29,7 +29,7 @@ function get_all_comments($id) {
   $result = $db->query($sql);
   while($row = $db->fetch_assoc($result)) {
     $r_id = $row['id'];
-    $r_cmt = $row['comment'];
+    $r_cmt = htmlentities($row['comment']);
     $r_cnt = $row['article_id'];
     $r_date = $row['date_created'];
     $comment_arr[] = new Comment($r_id, $r_cmt, $r_cnt, $r_date);
