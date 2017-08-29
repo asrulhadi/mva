@@ -54,7 +54,8 @@ class Article {
   }
 
   function get_title() {
-    return $this->title;
+    // return safe html string to be displayed
+    return filter_var($this->title, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
   }
 
   function set_title($title) {
@@ -62,7 +63,7 @@ class Article {
   }
 
   function get_content() {
-    return $this->content;
+    return htmlentities($this->content);    // not good. Lost all formatting
   }
 
   function set_content($content) {
