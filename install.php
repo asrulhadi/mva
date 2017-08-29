@@ -27,7 +27,7 @@ if(isset($_REQUEST["install"]) && $_REQUEST["install"] == "yes") {
 	$msg .= '<div class="bg-'. $cl .'">Database ' . $db['name'] . $err . " created</div>";
 	$link->select_db($db['name']);
 	
-	if ($link->query("CREATE TABLE user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(16), password VARCHAR(64), avatar VARCHAR(128), admin BOOLEAN)")) {
+	if ($link->query("CREATE TABLE user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(32), password VARCHAR(128), avatar VARCHAR(128), admin BOOLEAN)")) {
 		$cl = "success"; $err = "";
 	} else {
 		$cl = "danger"; $err = $link->error;
