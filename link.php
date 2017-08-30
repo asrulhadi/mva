@@ -29,7 +29,9 @@ if (isset($_GET['mode']) && !empty($_GET['mode'])) {
   // File Mode
   case "file":
     if (isset($_GET['target']) && !empty($_GET['target'])) {
-      $target = "text" . $s . $_GET['target'];
+      // make sure target is a file name and have .txt 
+      $target_f = basename($_GET['target'], ".txt") . ".txt";
+      $target = "text" . $s . $target_f;  // allow only in "text" directory
       if (is_readable($target)) {
         // read the file
         $smarty->assign('content', file_get_contents($target));
@@ -42,7 +44,9 @@ if (isset($_GET['mode']) && !empty($_GET['mode'])) {
   case "dir":
     if (isset($_GET['target']) && !empty($_GET['target']) && is_readable($_GET['target'])) {
       $target = $_GET['target'];
-      if (is_dir($target) && ($dirs = scandir($target))) {
+      $target_d = getcwd() . "/" . $target;   // assuming the target is inside our path
+      $ok = ( $target_d === realpath($target_d) );   // make sure only read "allowable" directory
+      if ($ok && is_dir($target) && ($dirs = scandir($target))) {
         $odirs = array();
         $oimgs = array();
         // read files in dir
