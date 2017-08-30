@@ -65,11 +65,11 @@ class User {
   function login($username, $password) {
     $db = DB::get_instance();
     // avoid SQLi using prepared statement / bind variable
-    if (!($stmt = $db->connection->prepare("SELECT * FROM user WHERE username=? AND password=?"))) {
+    if (!($stmt = $db->connection->prepare("SELECT * FROM user WHERE username=?"))) {
  		  die("Prepare failed: (" . $db->errno . ") " . $db->error);
  	  }
 	  // 2. Bind the two string parameters --> ss
- 	  if (!$stmt->bind_param("ss", $username,$password)) {
+ 	  if (!$stmt->bind_param("s", $username)) {
 		  die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
 	  }
 	  // 3. execute the query
@@ -80,6 +80,8 @@ class User {
     $result= $stmt->get_result();
     if ($db->count_rows($result)) {
       $row = $db->fetch_assoc($result);
+      // check if password is correct. If not, just return without creating a session
+      if (! password_verify($password, $row['password']) ) { return; }
       $this->set_user_id($row['id']);
       $this->set_username($row['username']);
       $this->set_avatar($row['avatar']);
