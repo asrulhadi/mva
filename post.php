@@ -11,6 +11,8 @@
  * @modified 2015
  */
 
+include_once("libs/csrfp/libs/csrf/csrfprotector.php");
+
 require("libs/DB.php");
 require("libs/User.php");
 require("libs/Article.php");
@@ -19,6 +21,7 @@ require("libs/Smarty.class.php");
 
 $smarty = new Smarty();
 $db = DB::get_instance();
+csrfProtector::init();
 
 // this is need an authenticated user
 $user = new User();

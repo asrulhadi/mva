@@ -11,8 +11,8 @@ return array(
 	"errorRedirectionPage" => "",
 	"customErrorMessage" => "",
 	"jsPath" => "../js/csrfprotector.js",
-	"jsUrl" => "",
-	"tokenLength" => 10,
+	"jsUrl" => "http://172.16.42.128/~mva/libs/csrfp/js/csrfprotector.js",
+	"tokenLength" => 15,
 	"disabledJavascriptMessage" => "This site attempts to protect users against <a href=\"https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29\">
 	Cross-Site Request Forgeries </a> attacks. In order to do so, you must have JavaScript enabled in your web browser otherwise this site will fail to work correctly for you.
 	 See details of your web browser for how to enable JavaScript.",
