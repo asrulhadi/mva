@@ -78,7 +78,7 @@ class User {
 
   // This function is used to start a session and set initial variables
   private function create_user_session() {
-    session_start();
+    if (session_status() !== PHP_SESSION_ACTIVE) { session_start(); }
     $_SESSION['user_id'] = $this->get_user_id();
     $_SESSION['username'] = $this->get_username();
     $_SESSION['avatar'] = $this->get_avatar();
