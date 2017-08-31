@@ -16,7 +16,7 @@
   </p>
 </div>
 {/if}
-{if ($smarty.session.admin)}
+{if isset($smarty.session.admin) && $smarty.session.admin}
 <div class="sidebar-module">
   <h4>Admin Modules</h4>
   <ol class="list-unstyled">
