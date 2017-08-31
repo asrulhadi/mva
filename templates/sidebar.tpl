@@ -9,11 +9,11 @@
 {else}
 <div class="sidebar-module sidebar-module-inset">
   <h4>About</h4>
-  <p>
+  <div>
     <div>Vulnerable Web Application</div>
     <em>Do not host publicly</em>
     <div class="warning">You have been warned!!!</div>
-  </p>
+  </div>
 </div>
 {/if}
 {if isset($smarty.session.admin) && $smarty.session.admin}
