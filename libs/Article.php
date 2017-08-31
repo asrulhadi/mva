@@ -11,12 +11,15 @@
  * @modified 2015
  */
 
+require_once "libs/htmlpurifier/HTMLPurifier.auto.php";
+
 class Article {
   private $id = null;
   private $user_id = null;
   private $title = null;
   private $content = null;
   private $date_created = null;
+  private $purifier = null;
 
   function __construct($article_id='') {
     if (!empty($article_id)) {
@@ -26,6 +29,10 @@ class Article {
         throw new Exception('Cannot find');
       }
     }
+    // setup purifier --> HTML & UTF-8
+    $config = HTMLPurifier_Config::createDefault();
+    $config->set('HTML.Doctype', 'HTML 4.01 Strict');
+    $this->purifier = new HTMLPurifier($config);
   }
   
   function get_id() {
@@ -63,11 +70,11 @@ class Article {
   }
 
   function get_content() {
-    return htmlentities($this->content);    // not good. Lost all formatting
+    return $this->content;
   }
 
   function set_content($content) {
-    $this->content = $content;
+    $this->content = $this->purifier->purify($content);  // safe a "safe" content. Just one time sanitized
   }
 
   function get_date_created() {
