@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>comment.php</title>
+<meta name="Generator" content="Vim/7.4">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="php">
+<meta name="settings" content="number_lines,use_css,pre_wrap,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.LineNr { color: #af5f00; }
+.Comment { color: #0000c0; }
+.Constant { color: #c00000; }
+.Special { color: #c000c0; }
+.Identifier { color: #008080; }
+.Statement { color: #af5f00; }
+.PreProc { color: #c000c0; }
+.Type { color: #008000; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<pre id='vimCodeElement'>
+<span id="L1" class="LineNr"> 1 </span><span class="Special">&lt;?php</span>
+<span id="L2" class="LineNr"> 2 </span><span class="Comment">/**</span>
+<span id="L3" class="LineNr"> 3 </span><span class="Comment"> * Part of Web Application Secure Coding - PHP</span>
+<span id="L4" class="LineNr"> 4 </span><span class="Comment"> * It is extremely insecure! Please do not use</span>
+<span id="L5" class="LineNr"> 5 </span><span class="Comment"> * this in any kind of production environment</span>
+<span id="L6" class="LineNr"> 6 </span><span class="Comment"> * </span>
+<span id="L7" class="LineNr"> 7 </span><span class="Comment"> * </span><span class="PreProc">@author </span><span class="Comment">jackwillk</span>
+<span id="L8" class="LineNr"> 8 </span><span class="Comment"> * </span><span class="Type">@created </span><span class="Comment">2010</span>
+<span id="L9" class="LineNr"> 9 </span><span class="Comment"> *</span>
+<span id="L10" class="LineNr">10 </span><span class="Comment"> * </span><span class="PreProc">@author </span><span class="Comment">asrulhadi</span>
+<span id="L11" class="LineNr">11 </span><span class="Comment"> * </span><span class="PreProc">@modified </span><span class="Comment">2015</span>
+<span id="L12" class="LineNr">12 </span><span class="Comment"> */</span>
+<span id="L13" class="LineNr">13 </span>
+<span id="L14" class="LineNr">14 </span><span class="PreProc">require</span><span class="Special">(</span><span class="Constant">&quot;libs/DB.php&quot;</span><span class="Special">)</span>;
+<span id="L15" class="LineNr">15 </span><span class="PreProc">require</span><span class="Special">(</span><span class="Constant">&quot;libs/User.php&quot;</span><span class="Special">)</span>;
+<span id="L16" class="LineNr">16 </span><span class="PreProc">require</span><span class="Special">(</span><span class="Constant">&quot;libs/Article.php&quot;</span><span class="Special">)</span>;
+<span id="L17" class="LineNr">17 </span><span class="PreProc">require</span><span class="Special">(</span><span class="Constant">&quot;libs/Comment.php&quot;</span><span class="Special">)</span>;
+<span id="L18" class="LineNr">18 </span><span class="PreProc">require</span><span class="Special">(</span><span class="Constant">&quot;libs/Smarty.class.php&quot;</span><span class="Special">)</span>;
+<span id="L19" class="LineNr">19 </span>
+<span id="L20" class="LineNr">20 </span><span class="Statement">$</span><span class="Identifier">user</span> <span class="Statement">=</span> <span class="PreProc">new</span> User<span class="Special">()</span>;
+<span id="L21" class="LineNr">21 </span><span class="Statement">$</span><span class="Identifier">smarty</span> <span class="Statement">=</span> <span class="PreProc">new</span> Smarty<span class="Special">()</span>;
+<span id="L22" class="LineNr">22 </span><span class="Statement">$</span><span class="Identifier">db</span> <span class="Statement">=</span> DB<span class="Statement">::</span>get_instance<span class="Special">()</span>;
+<span id="L23" class="LineNr">23 </span>
+<span id="L24" class="LineNr">24 </span><span class="Statement">if</span><span class="Special">(</span><span class="Statement">isset</span><span class="Special">(</span><span class="Statement">$</span><span class="Identifier">_POST</span><span class="Special">[</span><span class="Constant">'submit'</span><span class="Special">]))</span> <span class="Special">{</span>
+<span id="L25" class="LineNr">25 </span>  <span class="Comment">// save the comment</span>
+<span id="L26" class="LineNr">26 </span>  <span class="Statement">$</span><span class="Identifier">comment</span> <span class="Statement">=</span> <span class="PreProc">new</span> Comment<span class="Special">()</span>;
+<span id="L27" class="LineNr">27 </span>  <span class="Statement">$</span><span class="Identifier">comment</span><span class="Type">-&gt;</span>set_comment<span class="Special">(</span><span class="Statement">$</span><span class="Identifier">_POST</span><span class="Special">[</span><span class="Constant">'comment'</span><span class="Special">])</span>;
+<span id="L28" class="LineNr">28 </span>  <span class="Statement">$</span><span class="Identifier">comment</span><span class="Type">-&gt;</span>set_article_id<span class="Special">(</span><span class="Statement">$</span><span class="Identifier">_POST</span><span class="Special">[</span><span class="Constant">'article_id'</span><span class="Special">])</span>;
+<span id="L29" class="LineNr">29 </span>  <span class="Statement">$</span><span class="Identifier">comment</span><span class="Type">-&gt;</span>write<span class="Special">()</span>;
+<span id="L30" class="LineNr">30 </span>  <span class="Statement">$</span><span class="Identifier">smarty</span><span class="Type">-&gt;</span><span class="Identifier">assign</span><span class="Special">(</span><span class="Constant">'info'</span>, <span class="Constant">'Your comment: '</span> <span class="Statement">.</span> <span class="Statement">$</span><span class="Identifier">comment</span><span class="Type">-&gt;</span>get_comment<span class="Special">())</span>;
+<span id="L31" class="LineNr">31 </span>  <span class="Statement">$</span><span class="Identifier">smarty</span><span class="Type">-&gt;</span><span class="Identifier">assign</span><span class="Special">(</span><span class="Constant">'msg'</span>, <span class="Constant">'Your comment has been regsitered'</span><span class="Special">)</span>;
+<span id="L32" class="LineNr">32 </span>  <span class="Statement">$</span><span class="Identifier">smarty</span><span class="Type">-&gt;</span><span class="Identifier">assign</span><span class="Special">(</span><span class="Constant">'page'</span>, <span class="Constant">'article.php?id='</span> <span class="Statement">.</span> <span class="Statement">$</span><span class="Identifier">comment</span><span class="Type">-&gt;</span>get_article_id<span class="Special">())</span>;
+<span id="L33" class="LineNr">33 </span>  <span class="Statement">$</span><span class="Identifier">smarty</span><span class="Type">-&gt;</span><span class="Identifier">assign</span><span class="Special">(</span><span class="Constant">'title'</span>, <span class="Constant">'Article Page'</span><span class="Special">)</span>;
+<span id="L34" class="LineNr">34 </span>  <span class="Statement">$</span><span class="Identifier">smarty</span><span class="Type">-&gt;</span>display<span class="Special">(</span><span class="Constant">'redirect.tpl'</span><span class="Special">)</span>;
+<span id="L35" class="LineNr">35 </span><span class="Special">}</span> <span class="Statement">else</span> <span class="Special">{</span>
+<span id="L36" class="LineNr">36 </span>  <span class="Comment">// missing content id</span>
+<span id="L37" class="LineNr">37 </span>  <span class="Statement">$</span><span class="Identifier">article_id</span> <span class="Statement">=</span> <span class="Statement">$</span><span class="Identifier">_GET</span><span class="Special">[</span><span class="Constant">'article_id'</span><span class="Special">]</span>;
+<span id="L38" class="LineNr">38 </span>  <span class="Statement">if</span><span class="Special">(</span><span class="Statement">!</span><span class="Statement">$</span><span class="Identifier">article_id</span><span class="Special">)</span> <span class="Special">{</span>
+<span id="L39" class="LineNr">39 </span>    <span class="PreProc">echo</span><span class="Special">(</span><span class="Constant">&quot;Missing content id&quot;</span><span class="Special">)</span>;
+<span id="L40" class="LineNr">40 </span>    <span class="Statement">exit</span><span class="Special">()</span>;
+<span id="L41" class="LineNr">41 </span>  <span class="Special">}</span>
+<span id="L42" class="LineNr">42 </span>  <span class="Statement">$</span><span class="Identifier">article</span> <span class="Statement">=</span> <span class="PreProc">new</span> Article<span class="Special">(</span><span class="Statement">$</span><span class="Identifier">article_id</span><span class="Special">)</span>;
+<span id="L43" class="LineNr">43 </span>  <span class="Statement">$</span><span class="Identifier">smarty</span><span class="Type">-&gt;</span><span class="Identifier">assign</span><span class="Special">(</span><span class="Constant">'title'</span>, <span class="Statement">$</span><span class="Identifier">article</span><span class="Type">-&gt;</span>get_title<span class="Special">())</span>;
+<span id="L44" class="LineNr">44 </span>  <span class="Statement">$</span><span class="Identifier">smarty</span><span class="Type">-&gt;</span><span class="Identifier">assign</span><span class="Special">(</span><span class="Constant">'article_id'</span>, <span class="Statement">$</span><span class="Identifier">article_id</span><span class="Special">)</span>;
+<span id="L45" class="LineNr">45 </span>  <span class="Statement">$</span><span class="Identifier">smarty</span><span class="Type">-&gt;</span>display<span class="Special">(</span><span class="Constant">&quot;comment.tpl&quot;</span><span class="Special">)</span>;
+<span id="L46" class="LineNr">46 </span><span class="Special">}</span>
+<span id="L47" class="LineNr">47 </span>
+<span id="L48" class="LineNr">48 </span><span class="Comment">// vim&#0058; et:sta:ai:ts=2:sw=2:fen:fdm=indent:</span>
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
