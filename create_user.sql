@@ -1,0 +1,3 @@
+CREATE USER 'mva'@'localhost' IDENTIFIED BY 'mva';
+GRANT ALL PRIVILEGES ON *.* TO 'mva'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
