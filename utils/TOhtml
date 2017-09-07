@@ -6,7 +6,7 @@ for f in *.php libs/*.php templates/*.tpl; do
   [ "${f%%.class.php}" == "$f" ] || continue
   pushd html/ > /dev/null
   mkdir -p `dirname $f`
-  cp ../PHP/${f} ${f}
+  cp ../${f} ${f}
   nvim -E -s -c "set background=light" -c "set nofoldenable" -c "let g:html_number_lines=1" -c "TOhtml" -c "wqa" $f
   sed -Ee "s@${ROOT}/html/(.*php).html@\1@" -i '.ori' "${f}.html"
   rm "${f}" "${f}.html.ori"
