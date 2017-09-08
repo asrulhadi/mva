@@ -29,13 +29,13 @@ if ($user->get_user_id()) {
 }
 
 if (isset($_POST['submit'])) {
-  $user->login($_POST['username'], $_POST['password']);
+  $user->login(TODO: get username & password);
   if($user->get_user_id()) {
     // successfully login. Goto home page
     header("Location:index.php");
   } else {
     // error in login. Either username or password
-    $smarty->assign('error',"Username or Password incorrect");
+    $smarty->assign('error',TODO: give error message);
   }
 }
 

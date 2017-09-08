@@ -18,7 +18,7 @@
         {foreach $dirs as $dir}
         <tr>
           <td><img src="{$dir['src']|escape:'urlpathinfo'}" /></td>
-          <td>{$dir['name']|escape}</td>
+          <td>{TODO: name of directory}</td>
         </tr>
         {/foreach}
       </tbody>
@@ -45,7 +45,7 @@
 	{else}
         <div class="item">
 	{/if}
-          <img src="{$img['src']|escape:'urlpathinfo'}" alt="{$img['name']}" class="img-responsive center-block img-thumbnail" />
+          <img src="{TODO: src of img}" alt="{$img['name']}" class="img-responsive center-block img-thumbnail" />
           <div class="carousel-caption">
             {$img['name']|escape}
           </div>

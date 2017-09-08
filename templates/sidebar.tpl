@@ -1,7 +1,7 @@
 {if isset($smarty.session.user_id)}
 <div class="sidebar-module">
   <h4>Welcome {$smarty.session.username}</h4>
-  <img src="avatar/{$smarty.session.avatar}" height='75' width='75' />
+  <img src="avatar/{TODO: session avatar}" height='75' width='75' />
   <ol class="list-unstyled">
     <li><a href="post.php">Post Article</a></li>
   </ol>
@@ -16,7 +16,7 @@
   </p>
 </div>
 {/if}
-{if ($smarty.session.admin)}
+{if (TODO: is admin?)}
 <div class="sidebar-module">
   <h4>Admin Modules</h4>
   <ol class="list-unstyled">

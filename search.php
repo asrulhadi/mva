@@ -20,15 +20,15 @@ $smarty = new Smarty;
 function get_all_article($keyword) {
   $db = DB::get_instance();
   $sql = "SELECT id FROM article WHERE title LIKE '%$keyword%' or content LIKE '%$keyword%'";
-  $result = $db->query($sql);
+  $result = TODO: query the database
   $content_arr = [];
   while($row=$db->fetch_assoc($result)) {
-    $content_arr[] = new Article($row['id']);
+    TODO: add to array the article
   }
   return $content_arr;
 }
 
-$key = $_GET['q'];
+$key = TODO: get the keyword for query
 // display the result or indicate no article found
 // defaulting to null
 $articles = [];

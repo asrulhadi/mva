@@ -9,8 +9,8 @@
  * @created 2015
  */
 
-unset($_COOKIE['PHPSESSID']);
-session_start();
+TODO: unset the cookies
+TODO: start a new session
 
 require("libs/Smarty.class.php");
 

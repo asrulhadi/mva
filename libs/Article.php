@@ -40,8 +40,8 @@ class Article {
   function get_username() {
     $db = DB::get_instance();
     $sql = "SELECT username FROM user WHERE id = " . $this->user_id;
-    $result = $db->query($sql);
-    $row = $db->fetch_assoc($result);
+    $result = TODO: query database
+    $row = TODO: fetch the result in dict format
     return $row['username'];
   }
 
@@ -84,8 +84,8 @@ class Article {
     if (mysqli_num_rows($result)) {
       $row = $db->fetch_assoc($result);
       $this->user_id = $row['user_id'];
-      $this->title = $row['title'];
-      $this->content = $row['content'];
+      TODO: set the title
+      TODO: set the content
       $this->date_created = $row['date_created'];
     } else {
       return False;

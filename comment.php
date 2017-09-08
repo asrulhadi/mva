@@ -26,8 +26,8 @@ if(isset($_POST['submit'])) {
   $comment = new Comment();
   $comment->set_comment($_POST['comment']);
   $comment->set_article_id($_POST['article_id']);
-  $comment->write();
-  $smarty->assign('info', 'Your comment: ' . $comment->get_comment());
+  TODO: save the comment
+  $smarty->assign('info', 'Your comment: ' . TODO: get the comment);
   $smarty->assign('msg', 'Your comment has been regsitered');
   $smarty->assign('page', 'article.php?id=' . $comment->get_article_id());
   $smarty->assign('title', 'Article Page');

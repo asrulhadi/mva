@@ -25,7 +25,7 @@ $db = DB::get_instance();
 function get_all_comments($id) {
   $db = DB::get_instance();
   $comment_arr = [];
-  $sql = "SELECT * FROM comment WHERE article_id = '$id' ORDER BY date_created";
+  $sql = "TODO: select comment related to the article selected"
   $result = $db->query($sql);
   while($row = $db->fetch_assoc($result)) {
     $r_id = $row['id'];
@@ -43,10 +43,10 @@ if($article_id) {
     // Display the article
     $article = new Article($article_id);
     $smarty->assign('id', $article->get_id());
-    $smarty->assign('title', $article->get_title());
-    $smarty->assign('date_created', $article->get_date_created());
-    $smarty->assign('username', $article->get_username());
-    $smarty->assign('content', $article->get_content());
+    $smarty->assign('title', TODO: get the title);
+    $smarty->assign('date_created', TODO: get the date);
+    $smarty->assign('username', TODO: get the username);
+    $smarty->assign('content', TODO: get the content);
     $smarty->assign('comments', get_all_comments($article_id));
     $smarty->display("article.tpl");
   } catch (Exception $e) {

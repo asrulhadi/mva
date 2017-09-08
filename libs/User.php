@@ -69,9 +69,9 @@ class User {
     if ($db->count_rows($result)) {
       $row = $db->fetch_assoc($result);
       $this->set_user_id($row['id']);
-      $this->set_username($row['username']);
+      TODO: set username
       $this->set_avatar($row['avatar']);
-      $this->set_admin($row['admin']);
+      TODO: set admin level
       $this->create_user_session();
     }
   }
@@ -80,7 +80,7 @@ class User {
   private function create_user_session() {
     session_start();
     $_SESSION['user_id'] = $this->get_user_id();
-    $_SESSION['username'] = $this->get_username();
+    TODO: set username in session
     $_SESSION['avatar'] = $this->get_avatar();
     $_SESSION['admin'] = $this->is_admin();
   }
@@ -90,7 +90,7 @@ class User {
     session_start();
     if(array_key_exists('user_id', $_SESSION) 
       && array_key_exists('username', $_SESSION)) {
-      return true;
+      TODO: return true
     }
     return false;
   }

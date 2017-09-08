@@ -19,7 +19,7 @@ $db = DB::get_instance();
 // which page to display, default to login form
 $page = "signup.tpl";
 
-if ($user->get_user_id()) {
+if (TODO: check if user already login) {
   // already logged in, redirect to homepage
   $smarty->assign("msg","You are already logged in.");
   $page = "redirect.tpl";
@@ -38,7 +38,7 @@ if (isset($_POST['register']) &&
 
   $db = DB::get_instance();
   // check username
-  $sql = "SELECT id,username FROM user";
+  $sql = TODO: select from user
   $users = $db->query($sql);
   while ($row = $db->fetch_assoc($users)) {
     if ($row['username'] == $name) {
@@ -55,7 +55,7 @@ if (isset($_POST['register']) &&
     if (isset($_FILES['avatar']) && !empty($_FILES['avatar']['name'])) {
       $avatar = basename($_FILES['avatar']['name']);
       $tmpfile = $_FILES['avatar']['tmp_name'];
-      if (move_uploaded_file($tmpfile, "$dir/avatar/$avatar")) {
+      if (TODO: move the uploaded file to avatar dir) {
       } else {
         $error = True;
         $errmsg = "File upload error";
@@ -64,7 +64,7 @@ if (isset($_POST['register']) &&
   }
   if (! $error) {
     // create user
-    $sql = "INSERT INTO user (username,password,avatar) VALUES ('$name','$pass','$avatar')";
+    $sql = TODO: insert the new user to database
     $res = $db->query($sql);
     if ( $res ) {
       // successfully register

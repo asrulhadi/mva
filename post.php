@@ -20,12 +20,12 @@ require("libs/Smarty.class.php");
 $smarty = new Smarty();
 $db = DB::get_instance();
 
-if(isset($_POST['submit'])) {
+if(TODO: something posted) {
   // create new article
   $content = new Article();
-  $content->set_user_id($_POST['user_id']);
-  $content->set_title($_POST['title']);
-  $content->set_content($_POST['content']);
+  TODO: set user id
+  TODO: set the title
+  TODO: set the content
   // write article to database
   $content->write();
   $smarty->assign('info', '<p>Preview of article:</p><p>' . $content->get_content() . '</p>');

@@ -19,8 +19,8 @@ class Comment {
 
   function __construct($comment_id='', $comment='', $article_id='', $date_created='') {
     $this->set_comment_id($comment_id);
-    $this->set_comment($comment);
-    $this->set_article_id($article_id);
+    TODO: set the comment
+    TODO: set article id
     $this->set_date_created($date_created);
   }
 
@@ -58,7 +58,7 @@ class Comment {
 
   function write() {
     $db = DB::get_instance();
-    $sql = "INSERT INTO comment (comment, article_id) VALUES " . 
+    $sql = TODO: SQL command to insert
       "( '" . $this->comment . "'" . 
       ", '" . $this->article_id . "')";
     $result = $db->query($sql);

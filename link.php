@@ -32,7 +32,7 @@ if (isset($_GET['mode']) && !empty($_GET['mode'])) {
       $target = "text" . $s . $_GET['target'];
       if (is_readable($target)) {
         // read the file
-        $smarty->assign('content', file_get_contents($target));
+        $smarty->assign('content', TODO: get the file content);
       } else {
         $smarty->assign('error','File does not exist or unreadable');
       }
@@ -55,7 +55,7 @@ if (isset($_GET['mode']) && !empty($_GET['mode'])) {
             $odirs[] = array('name' => $dir, 'src' => 'avatar/folder.png');
           }
           // only display if image
-          if (is_file($f) && is_readable($f) && substr(mime_content_type($f),0,5) === "image" ) {
+          if (is_file($f) && is_readable($f) && TODO: check if the file is an image ) {
             $oimgs[] = array('name' => $dir, 'src' => $f);
           }
         }

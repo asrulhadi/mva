@@ -19,11 +19,11 @@ require("libs/Smarty.class.php");
 
 function get_all_content() {
   $db = DB::get_instance();
-  $sql = "SELECT id FROM article ORDER BY date_created DESC";
+  $sql = "TODO: select all article" 
   $result = $db->query($sql);
   $content_arr = [];
   while($row=$db->fetch_assoc($result)) {
-    $content_arr[] = new Article($row['id']);
+    $content_arr[] = TODO: create new article
   }
   return $content_arr;
 }
@@ -31,7 +31,7 @@ function get_all_content() {
 $user = new User();
 
 $smarty = new Smarty;
-$smarty->assign('articles', get_all_content());
+$smarty->assign('articles', TODO: get all content);
 $smarty->display("index.tpl");
 
 // vim: et:sta:ai:ts=2:sw=2:fen:fdm=indent:
